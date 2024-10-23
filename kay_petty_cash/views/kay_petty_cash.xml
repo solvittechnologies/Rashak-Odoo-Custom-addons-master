@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_kay_petty_cash_form" model="ir.ui.view">
+            <field name="name">view.kay.petty.cash.form</field>
+            <field name="model">kay.petty.cash</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="button_journal_entries"
+								string="Accounting Entries" type="object"
+								attrs="{'invisible':[('move_ids','=',[])]}" icon="fa-bars"/>
+						    <field name="move_ids" invisible="1"/>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="employee_id" required="1"/>
+                                <field name="location"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                            </group>
+                            <group>
+                                <field name="amount_allocated"/>
+                                <field name="amount_expended"/>
+                                <field name="balance"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Issue amount to custodian">
+                                <field name="petty_cash_lines">
+                                    <tree editable="bottom" default_order="date desc">
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="amount" sum="Total"/>
+                                        <field name="account_debit"/>
+                                        <field name="account_credit"/>
+                                        <field name="journal_id"/>
+                                        <field name="state" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Petty Breakdown">
+                                <field name="petty_cash_breakdown_lines">
+                                    <tree editable="bottom" default_order="date desc">
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="amount" sum="Total"/>
+                                        <field name="account_debit"/>
+                                        <field name="account_credit"/>
+                                        <field name="journal_id"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_request_kay_petty_cash_list">
+            <field name="name">purchase.request.kay.petty.cash.list</field>
+            <field name="model">kay.petty.cash</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id" />
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="location"/>
+                    <field name="amount_allocated"/>
+                    <field name="amount_expended"/>
+                    <field name="balance"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="kay_petty_cash_action" model="ir.actions.act_window">
+            <field name="name">Petty Cash</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">kay.petty.cash</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Petty Cash"
+                  id="account_kay_petty_cash_menu"
+                  parent="account_accountant.menu_accounting"
+                  sequence="5"
+                  action="kay_petty_cash_action"/>
+
+    </data>
+</odoo>

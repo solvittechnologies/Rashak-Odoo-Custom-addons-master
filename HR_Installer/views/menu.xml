@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+            id="hr_root_fastra"
+            name="Human Resource"
+            sequence="185"/>
+
+
+        <record model="ir.ui.menu" id="hr.menu_hr_root">
+            <field name="parent_id" ref="HR_Installer.hr_root_fastra"/>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="group_nobody" model="res.groups">
+    <field name="name">Invisible quotation Menu Group</field>
+</record>
+
+<record id="sale.menu_sale_quotations" model="ir.ui.menu">
+    <field name="groups_id" eval="[(4, ref('hide_sale_quotation_menu.group_nobody'))]" />
+</record>
+    <!-- <record id="sale.sale_order_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+    </record> -->
+     <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+        <field name="groups_id" eval="[(3, ref('sales_team.group_sale_salesman'))]" />
+    </record>
+</odoo>
+

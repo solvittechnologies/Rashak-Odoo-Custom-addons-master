@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <data>
+
+        
+        <record id="custom_payroll_report_view_pivot" model="ir.ui.view">
+            <field name="name">custom.payroll.report.pivot</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <pivot string="Payroll" >
+                    <field name="name" type="row"/>
+                    <field name="gross_salary" type="measure" string="Gross Salary"/>
+                    <field name="basic_salary" type="measure" string="Basic Salary"/>
+                    <field name="housing_allow" type="measure" string="Housing_Allowance"/>
+                    <field name="transport" type="measure" string="Transport"/>
+                    <field name="interns_stipends" type="measure" string="Interns Stipends"/>
+                    <field name="back_pay" type="measure" string="Back Pay"/>
+                    <field name="bonus" type="measure" string="Bonus"/>
+                    <field name="overtime" type="measure" string="Overtime"/>
+                    <field name="gross_monthly" type="measure" string="Gross Monthly"/>
+                    <field name="annual_gross_income" type="measure" string="Annual Gross Income"/>
+                    <field name="pension" type="measure" string="Pension (8% of BHT)"/>
+                    <field name="nhf_annual" type="measure" string="NHF ANNUAL"/>
+                    <field name="net_g_income" type="measure" string="Net G.Income"/>
+                    <field name="consollidated_relief_all_variable" type="measure" string="Consolidated Relief Allowance (variable) the higher of N200,000 or 1% of Gross Income"/>
+                    <field name="consollidated_relief_all_fixed" type="measure" string="Consolidated Relief Allowance Fixed) 20% of Net Gross Income."/>
+                    <field name="consolidated_relief_all_mth_total" type="measure" string="Consolidated Relief Allowance MONTHLY TOTAL"/>
+                    <field name="taxable_income_annual" type="measure" string="Taxable Income ANNUAL"/>
+                    <field name="taxable_income_monthly" type="measure" string="Taxable Income MONTHLY"/>
+                    <field name="first_300_7" type="measure" string="FIRST 300,000 @ 7%"/>
+                    <field name="next_300_11" type="measure" string="NEXT 300,000@11%"/>
+                    <field name="next_500_15" type="measure" string="NEXT 500,000@15%"/>
+                    <field name="next_500_19" type="measure" string="NEXT 500,000@19%"/>
+                    <field name="next_160_21" type="measure" string="NEXT 1,600,000 @ 21%"/>
+                    <field name="next_320_24" type="measure" string="ABOVE 3,200,000 @ 24%"/>
+                    <field name="annual_paye" type="measure" string="ANNUAL PAYE"/>
+                    <field name="min_tax" type="measure" string="MINIMUM TAX: 1% OF ANNUAL GROSS INCOME"/>
+                    <field name="month_paye" type="measure" string="MONTHLY PAYE"/>
+                    <field name="month_pension" type="measure" string="MONTHLY PENSION"/>
+                    <field name="month_nhf" type="measure" string="MONTHLY NHF"/>
+                    <field name="deduction" type="measure" string="DEDUCTIONS"/>
+                    <field name="net_payout" type="measure" string="NET - PAYOUT"/>
+                    <field name="employee_pension_month" type="measure" string="Employer Pension (Monthly) 10% of BHT"/>
+                    <field name="nsitf" type="measure" string="NSITF: 1% of BHT"/>
+                    <field name="itf" type="measure" string="ITF: 1% of Gross Income"/>
+                    <field name="total_cost_to_company" type="measure" string="Total Cost of Employment to company (Monthly)"/>
+                    
+                </pivot>
+            </field>
+        </record>
+
+
+    </data>
+
+</odoo>
+

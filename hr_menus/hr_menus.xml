@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+        <menuitem id="hr_menus"
+                  sequence="1"
+                  name="Human Resources"
+                  web_icon="hr,static/description/icon.png"
+                  groups="group_show_hr_menu"/>
+
+        <menuitem id="hr.menu_hr_root"
+                  parent="hr_menus"
+                  sequence="0"
+                  name="Employees"/>
+
+        <!-- <menuitem id="hr_holidays.menu_hr_holidays_root"
+                  parent="hr_menus"
+                  sequence="5"
+                  name="Leave Management"
+                  active="False"/>-->
+
+        <menuitem id="hr_expense.menu_hr_expense_root"
+                  parent="hr_menus"
+                  sequence="6"
+                  name="Staff Requests"
+                  active="0"/>
+
+        <menuitem id="hr_expense.menu_hr_expense_my_expenses"
+                  name="Staff Requests"
+                  sequence="1"
+                  parent="hr_expense.menu_hr_expense_root"
+                  groups="base.group_user"/>
+
+        <record model="ir.ui.menu" id="hr_payroll.menu_hr_payroll_root">
+            <field name="parent_id" ref="hr_menus.hr_menus"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_work_entry_contract_enterprise.menu_hr_payroll_root">
+            <field name="parent_id" ref="hr_menus.hr_menus"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_holidays.menu_hr_holidays_root">
+            <field name="parent_id" ref="hr_menus.hr_menus"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_root">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_appraisal.menu_hr_appraisal_root">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_recruitment.menu_hr_recruitment_root">
+            <field name="active" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

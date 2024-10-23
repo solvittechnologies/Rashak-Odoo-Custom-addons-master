@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_show_hr_menu" model="res.groups">
+            <field name="name">Show "Human Resources" Menu</field>
+        </record>
+
+        <record id="make_invisible" model="res.groups">
+            <field name="name">Invisible Menu</field>
+        </record>
+
+    </data>
+</odoo>

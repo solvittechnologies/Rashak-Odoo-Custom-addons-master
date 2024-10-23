@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <data>
+
+        <menuitem name="payroll" id="custom_payroll_root" parent="hr_menus.hr_menus" sequence="196" action="hr_payroll_custom.action_payroll_table"
+                  groups="base.group_user"/>
+
+        <!--menuitem name="Table" id="custom_payroll_sheet" parent="custom_payroll_root"
+                  sequence="1"
+                  action="hr_payroll_custom.action_custom_payroll" 
+                  groups="base.group_user"/-->
+
+        <!--menuitem name="payroll" id="custom_payroll_root"  sequence="196" action="hr_payroll_custom.action_payroll_table"
+                  groups="base.group_user"/-->
+
+
+    </data>
+
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">sale,done</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">sent,purchase</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_orders_to_invoice" model="ir.actions.act_window">
+        <field name="name">SO to be Invoiced</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,calendar,graph,pivot,kanban,activity</field>
+        <field name="context">{'create': False}</field>
+        <field name="domain">[('invoice_status','=','to invoice')]</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No orders to invoice found
+            </p>
+            <p>
+                You can select all orders and invoice them in batch,<br />
+                or check every order and invoice them one by one.
+            </p>
+        </field>
+    </record>
+
+    <record id="po_invoice_act_window" model="ir.actions.act_window">
+            <field name="name">PO to be Invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,calendar,activity</field>
+            <field name="domain">[('invoice_ids', '=', False), ('state','in',('purchase', 'done'))]</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter" />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a quotation
+                  </p>
+                <p>
+                    It will be converted into a purchase order.
+                  </p>
+            </field>
+        </record>
+
+        <menuitem name="PO to be Invoice"
+                  id="po_to_invoice_menu"
+                  parent="account.menu_finance_payables"
+                  action="po_invoice_act_window"/>
+
+<!-- <menuitem id="menu_so_to_invoiced"
+            name="SO to be Invoiced"
+            parent="account.menu_finance_receivables"
+            sequence="3"/> -->
+
+
+<menuitem id="menu_so_to_invoiced" name="SO to be Invoiced" parent="account.menu_finance_receivables" action="action_orders_to_invoice" sequence="3"/>
+
+</odoo>

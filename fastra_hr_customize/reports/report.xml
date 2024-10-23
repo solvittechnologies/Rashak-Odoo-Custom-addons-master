@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="paperformat_hr_payslip_custom_report" model="report.paperformat">
+        <field name="name">hr payslip custom report</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_right">7</field>
+        <field name="margin_left">7</field>
+        <field name="header_line" eval="True"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="hr_payslip_custom_report"
+            model="report.fastra.payslip.print.report.wizard"
+            string="Employee Payslip"
+            report_type="qweb-pdf"
+            name="fastra_hr_customize.hr_payslip_custom_report_view"
+            paperformat="fastra_hr_customize.paperformat_hr_payslip_custom_report"
+            menu="False"
+            print_report_name="((object._get_report_base_filename()))"/>
+
+
+    <template id="hr_payslip_custom_report_view">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <main>
+                    <t t-set="docs" t-value="docs.with_context(lang=lang)"/>
+                    <t t-set="line_id" t-value="docs.payroll_line_id"/>
+                    <div class="page">
+                        <div style="padding-top:40px">
+                            <h2>Pay Slip</h2>
+                            <p>Salary Slip of
+                                <span t-if="line_id.employee_id">
+                                    <t t-esc="line_id.employee_id.name"/>
+                                </span>
+                            </p>
+                            <p>
+                                <span t-esc="line_id.payslip_custom_id.company_id.name"/>
+                            </p>
+                        </div>
+                        <table class="table o_main_table">
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <span t-if="line_id.employee_id" t-esc="line_id.employee_id.name"/>
+                                </td>
+                                <th></th>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>
+                                    <span t-if="line_id.employee_id.address_id" t-esc="line_id.employee_id.address_id.name"/>
+                                </td>
+                                <th>Month</th>
+                                <td>
+                                    <t t-esc="line_id.payslip_custom_id.month"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>
+                                    <t t-esc="line_id.employee_email"/>
+                                </td>
+                                <th>Period</th>
+                                <td>
+                                    <t t-esc="line_id.payslip_custom_id.date_from"/>
+                                    <span>-</span>
+                                    <t t-esc="line_id.payslip_custom_id.date_to"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <h2>Details by Salary Rule Category</h2>
+
+                        <table class="table table-sm o_main_table">
+                            <tr>
+                                <th>CODE</th>
+                                <th>SALARY RULE CATEGORY</th>
+                                <th>TOTAL</th>
+                            </tr>
+
+                            <t t-if="docs.gross_salary">
+                                <tr>
+                                    <td>GS</td>
+                                    <td>Gross Salary</td>
+                                    <td>
+                                        <t t-out="line_id.gross_salary"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.basic_salary">
+                                <tr>
+                                    <td>BAS</td>
+                                    <td>Basic Salary</td>
+                                    <td>
+                                        <t t-out="line_id.basic_salary"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.housing_allowance">
+                                <tr>
+                                    <td>HRA</td>
+                                    <td>Housing Allowance</td>
+                                    <td>
+                                        <t t-out="line_id.housing_allowance"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.transport">
+                                <tr>
+                                    <td>TAW</td>
+                                    <td>Transport</td>
+                                    <td>
+                                        <t t-out="line_id.transport"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.interns_stipends">
+                                <tr>
+                                    <td>IS</td>
+                                    <td>Interns Stipends</td>
+                                    <td>
+                                        <t t-out="line_id.interns_stipends"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.backpay">
+                                <tr>
+                                    <td>BP</td>
+                                    <td>BackPay</td>
+                                    <td>
+                                        <t t-out="line_id.backpay"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.bonus">
+                                <tr>
+                                    <td>BONUS</td>
+                                    <td>Bonus</td>
+                                    <td>
+                                        <t t-out="line_id.bonus"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.overtime">
+                                <tr>
+                                    <td>OV</td>
+                                    <td>Overtime</td>
+                                    <td>
+                                        <t t-out="line_id.overtime"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.gross_monthly">
+                                <tr>
+                                    <td>GM</td>
+                                    <td>Gross Monthly</td>
+                                    <td>
+                                        <t t-out="line_id.gross_monthly"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.annual_gross_income">
+                                <tr>
+                                    <td>AGI</td>
+                                    <td>Annual Gross Income</td>
+                                    <td>
+                                        <t t-out="line_id.annual_gross_income"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.pension">
+                                <tr>
+                                    <td>PESN</td>
+                                    <td>PENSION</td>
+                                    <td>
+                                        <t t-out="line_id.pension"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.nhf_annual">
+                                <tr>
+                                    <td>NHFA</td>
+                                    <td>NHF ANNUAL</td>
+                                    <td>
+                                        <t t-out="line_id.nhf_annual"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.net_g_income">
+                                <tr>
+                                    <td>NGI</td>
+                                    <td>Net G.Income</td>
+                                    <td>
+                                        <t t-out="line_id.net_g_income"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.consolidated_relief_allowance">
+                                <tr>
+                                    <td>CRA</td>
+                                    <td>Consolidated Relief Allowance</td>
+                                    <td>
+                                        <t t-out="line_id.consolidated_relief_allowance"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.consolidated_relief_allowance_fixed">
+                                <tr>
+                                    <td>CRAF</td>
+                                    <td>Consolidated Relief Allowance Fixed</td>
+                                    <td>
+                                        <t t-out="line_id.consolidated_relief_allowance_fixed"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.consolidated_relief_allowance_monthly">
+                                <tr>
+                                    <td>CRAMT</td>
+                                    <td>Consolidated Relief Allowance MONTHLY TOTAL</td>
+                                    <td>
+                                        <t t-out="line_id.consolidated_relief_allowance_monthly"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.taxable_income_annual">
+                                <tr>
+                                    <td>TIA</td>
+                                    <td>Taxable Income ANNUAL</td>
+                                    <td>
+                                        <t t-out="line_id.taxable_income_annual"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.taxable_income_monthly">
+                                <tr>
+                                    <td>TIM</td>
+                                    <td>Taxable Income MONTHLY</td>
+                                    <td>
+                                        <t t-out="line_id.taxable_income_monthly"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.paye">
+                                <tr>
+                                    <td>PAYE</td>
+                                    <td>PAYE</td>
+                                    <td>
+                                        <t t-out="line_id.paye"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.minimum_tax">
+                                <tr>
+                                    <td>MT</td>
+                                    <td>MINIMUM TAX</td>
+                                    <td>
+                                        <t t-out="line_id.minimum_tax"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.monthly_paye">
+                                <tr>
+                                    <td>MP</td>
+                                    <td>MONTHLY PAYE</td>
+                                    <td>
+                                        <t t-out="line_id.monthly_paye"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.monthly_pension">
+                                <tr>
+                                    <td>MPS</td>
+                                    <td>MONTHLY PENSION</td>
+                                    <td>
+                                        <t t-out="line_id.monthly_pension"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.monthly_nhf">
+                                <tr>
+                                    <td>MN</td>
+                                    <td>MONTHLY NHF</td>
+                                    <td>
+                                        <t t-out="line_id.monthly_nhf"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.deductions">
+                                <tr>
+                                    <td>DEDS</td>
+                                    <td>DEDUCTIONS</td>
+                                    <td>
+                                        <t t-out="line_id.deductions"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.net_payout">
+                                <tr>
+                                    <td>NP</td>
+                                    <td>NET - PAYOUT</td>
+                                    <td>
+                                        <t t-out="line_id.net_payout"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.employee_pension_monthly">
+                                <tr>
+                                    <td>EPM</td>
+                                    <td>Employer Pension (Monthly)</td>
+                                    <td>
+                                        <t t-out="line_id.employee_pension_monthly"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.nsitf">
+                                <tr>
+                                    <td>NSITF</td>
+                                    <td>NSITF</td>
+                                    <td>
+                                        <t t-out="line_id.nsitf"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.itf">
+                                <tr>
+                                    <td>ITF</td>
+                                    <td>ITF</td>
+                                    <td>
+                                        <t t-out="line_id.itf"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="docs.total_cost_employee_company_monthly">
+                                <tr>
+                                    <td>TCECM</td>
+                                    <td>Total Cost of Employment to company (Monthly)</td>
+                                    <td>
+                                        <t t-out="line_id.total_cost_employee_company_monthly"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </main>
+            </t>
+        </t>
+    </template>
+</odoo>

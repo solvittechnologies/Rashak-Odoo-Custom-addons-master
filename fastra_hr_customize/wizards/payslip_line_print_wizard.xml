@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_fastra_payslip_print_report_wizard" model="ir.ui.view">
+            <field name="name">report.fastra.payslip.print.report.wizard</field>
+            <field name="model">report.fastra.payslip.print.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="HR Payslip wizard">
+                    <group>
+                        <group>
+                            <field name="gross_salary"/>
+                            <field name="basic_salary"/>
+                            <field name="housing_allowance"/>
+                            <field name="transport"/>
+                            <field name="interns_stipends"/>
+                            <field name="backpay"/>
+                            <field name="bonus"/>
+                            <field name="overtime"/>
+                            <field name="gross_monthly"/>
+                            <field name="annual_gross_income"/>
+                            <field name="pension"/>
+                            <field name="nhf_annual"/>
+                            <field name="net_g_income"/>
+                            <field name="consolidated_relief_allowance"/>
+                            <field name="consolidated_relief_allowance_fixed"/>
+                            <field name="consolidated_relief_allowance_monthly"/>
+                        </group>
+                        <group>
+                            <field name="taxable_income_annual"/>
+                            <field name="taxable_income_monthly"/>
+                            <field name="paye"/>
+                            <field name="minimum_tax"/>
+                            <field name="monthly_paye"/>
+                            <field name="monthly_pension"/>
+                            <field name="monthly_nhf"/>
+                            <field name="deductions"/>
+                            <field name="net_payout"/>
+                            <field name="employee_pension_monthly"/>
+                            <field name="nsitf"/>
+                            <field name="itf"/>
+                            <field name="total_cost_employee_company_monthly"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

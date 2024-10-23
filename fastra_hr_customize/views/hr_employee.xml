@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_employee_form_inherit_loan" model="ir.ui.view">
+            <field name="name">view.employee.form.inherit.loan</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="work_phone" position="after">
+                    <field name="gross_monthly_pay"/>
+                    <field name="employee_unique_code" invisible="1"/>
+                </field>
+                <xpath expr="//field[@name='tz']" position="after">
+                    <field name="account_details"/>
+                    <field name="birth_date"/>
+                    <field name="date_of_employment"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
